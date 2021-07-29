@@ -166,6 +166,9 @@ func (client *timeTableClient) doRequest(method string, data io.Reader) ([]byte,
 		return nil, err
 	}
 	body, err := ioutil.ReadAll(res.Body)
+	
+	fmt.Printf("%v %v %v\n",res.StatusCode,resp.Request.URL.String(), string(body))
+	
 	return body, err
 }
 
