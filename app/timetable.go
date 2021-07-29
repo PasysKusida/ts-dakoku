@@ -178,6 +178,8 @@ func (client *timeTableClient) doRequest(method string, data io.Reader) ([]byte,
 	if err != nil {
 		return nil, err
 	}
+	
+	defer res.Body.Close()
 	body, err := ioutil.ReadAll(res.Body)
 	
 	fmt.Printf("%v %v %v\n",res.StatusCode,res.Request.URL.String(), string(body))
