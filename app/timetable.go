@@ -166,7 +166,7 @@ func (client *timeTableClient) doRequest(method string, data io.Reader) ([]byte,
 	
 	req, err := http.NewRequest(method, url, data)
 	
-	fmt.Printf("%v %v %v %v\n", req.Header, req.method, url, data)
+	fmt.Printf("%v %v %v %v\n", req.Header, req.Method, url, data)
 	
 	if err != nil {
 		return nil, err
