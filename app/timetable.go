@@ -188,7 +188,7 @@ func (client *timeTableClient) doRequest(method string, data io.Reader) ([]byte,
 }
 
 func (client *timeTableClient) GetTimeTable() (*timeTable, error) {
-	body, err := client.doRequest(http.MethodGet, nil)
+	body, err := client.doRequest("GET", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -201,7 +201,7 @@ func (client *timeTableClient) UpdateTimeTable(timeTable *timeTable) (bool, erro
 	if err != nil {
 		return false, err
 	}
-	body, err := client.doRequest(http.MethodPost, bytes.NewBuffer(b))
+	body, err := client.doRequest("POST", bytes.NewBuffer(b))
 	fmt.Printf("%v %v %v\n", string(body), err, string(body) == `"OK"`)
 	if err != nil {
 		return false, err
@@ -215,7 +215,7 @@ func (client *timeTableClient) SetAttendance(attendance bool) (bool, error) {
 	if err != nil {
 		return false, err
 	}
-	body, err := client.doRequest(http.MethodPut, bytes.NewBuffer(b))
+	body, err := client.doRequest("PUT", bytes.NewBuffer(b))
 	if err != nil {
 		return false, err
 	}
