@@ -154,7 +154,17 @@ func (ctx *Context) createTimeTableClient() *timeTableClient {
 }
 
 func (client *timeTableClient) doRequest(method string, data io.Reader) ([]byte, error) {
-	req, err := http.NewRequest(method, client.Endpoint, data)
+	
+	var url string
+	if method == http.MethodPost {
+		url = client.Endpoint + "/handleInputTimeTable"
+	} else if method == http.MethodPut {
+		url = client.Endpoint + "/handleSetAttendance"
+	} else {
+		url = client.Endpoint + "/handleGetTimeTable"
+	}
+	
+	req, err := http.NewRequest(method, url, data)
 	
 	fmt.Printf("%v %v %v %v\n", req.Header, method, client.Endpoint, data)
 	
